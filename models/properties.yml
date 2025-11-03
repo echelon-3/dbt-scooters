@@ -45,3 +45,8 @@ models:
     description: "Trip finish parking statistics by 10 m hexagons"
     config:
       materialized: "table"
+
+  - name: trips_users
+    description: "Prepared trips enriched with users data"
+    config:
+      materialized: "incremental"
