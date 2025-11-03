@@ -67,3 +67,8 @@ models:
       unique_key: ["date"] # уникальный ключ
       on_schema_change: "append_new_columns" # добавлять новые столбцы при их появлении в модели
       full_refresh: false # запрещает полный пересчёт таблицы
+
+  - name: "trips_concurrency"
+    description: "Number of simultaneous rides in time"
+    config:
+      materialized: "incremental"
