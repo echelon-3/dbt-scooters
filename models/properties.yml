@@ -58,3 +58,12 @@ models:
     description: "Prepared user events table without duplicates"
     config:
       materialized: "incremental"
+
+  - name: "revenue_daily"
+    description: "Summary daily revenue"
+    config:
+      materialized: "incremental" # стратегия материализации
+      incremental_strategy: "merge" # инкрементальная стратегия
+      unique_key: ["date"] # уникальный ключ
+      on_schema_change: "append_new_columns" # добавлять новые столбцы при их появлении в модели
+      full_refresh: false # запрещает полный пересчёт таблицы
