@@ -2,6 +2,7 @@ SELECT DISTINCT
     user_id
   , timestamp
   , type_id
+  , {{ updated_at() }}
 FROM {{ source("scooters_raw","events") }}
 {% if is_incremental() %}
     WHERE timestamp > (select max(timestamp) from {{ this }})
