@@ -12,5 +12,5 @@ SELECT
   , (price / 100)::decimal(20, 2)                AS price_rub
   , EXTRACT(EPOCH FROM finished_at - started_at) AS duration_s
   , started_at != finished_at AND price = 0      AS is_free
-  , date(started_at)                             AS date
+  , {{ date_in_moscow('started_at') }}           AS date
 FROM {{ source('scooters_raw', 'trips') }}
