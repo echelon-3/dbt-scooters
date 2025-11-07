@@ -65,15 +65,6 @@ models:
       incremental_strategy: "merge"
       unique_key: ["user_id", "timestamp", "type_id"]
 
-  - name: "revenue_daily"
-    description: "Summary daily revenue"
-    config:
-      materialized: "incremental" # стратегия материализации
-      incremental_strategy: "merge" # инкрементальная стратегия
-      unique_key: ["date"] # уникальный ключ
-      on_schema_change: "append_new_columns" # добавлять новые столбцы при их появлении в модели
-      full_refresh: false # запрещает полный пересчёт таблицы
-
   - name: "trips_concurrency"
     description: "Number of simultaneous rides in time"
     config:

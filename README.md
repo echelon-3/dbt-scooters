@@ -144,3 +144,7 @@ dbt run --models mymodel --full-refresh
 ```bash
 dbt test --models state:modified
 ```
+
+### Полезные макросы
+
+- `dbt run-operation create_role --args "name: finance"` - создание роли в базе (на примере роли "finance")
