@@ -15,3 +15,13 @@ seeds:
     description: "Age groups to split users for analysis"
     config:
       delimiter: ","
+    columns:
+      - name: "group"
+        description: "Age group name for report"
+        data_tests: ["unique_not_null"]
+      - name: "age_start"
+        description: "Start age of group"
+        data_tests: [ "unique_not_null" ]
+      - name: "age_end"
+        description: "End age of group"
+        data_tests: [ "unique_not_null" ]
