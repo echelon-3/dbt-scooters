@@ -48,6 +48,10 @@ models:
     description: "Trips prepared for analysis"
     config:
       materialized: "view"
+    data_tests:
+      - row_count_equal:
+          arguments:
+            compare_model: "source('scooters_raw', 'trips')"
 
   - name: trips_stat_daily
     description: "Overall trips statistics per day"
@@ -132,12 +136,17 @@ models:
 
   - name: "sex_age_pivot"
     description: "Trips per age pivoted by sex"
+
     columns:
       - name: "age"
         description: "Numerical age of user"
         tests:
           - dbt_utils.not_constant
+
     data_tests:
       - unique_key:
           arguments:
             columns: [ "age" ]
+      - dbt_expectations.expect_table_column_count_to_equal:
+          arguments:
+            value: 3            
