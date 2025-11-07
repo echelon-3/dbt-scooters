@@ -57,6 +57,9 @@ models:
         - columns: ['date']
           type: hash
 
+  - name: trips_stat
+    description: "Overall trips statistics"
+
   - name: trips_age_daily
     description: "Daily trips statistics by user age"
     data_tests:
