@@ -162,7 +162,7 @@ models:
       started search for scooter and finally booked it on or after
       1, 7, 14 days (or weeks, months, years), etc
 
-  - name: time_spine_daily
+  - name: "time_spine_daily"
     config:
       materialized: "table"
     time_spine:
@@ -170,3 +170,60 @@ models:
     columns:
       - name: date_day
         granularity: day
+
+  - name: "users_prep"
+    description: "Prepared users table w/o sensitive data"
+    config:
+      materialized: "view"
+
+  - name: "users_class_weekly_trips"
+    description: >
+      Classification of users by trips during the week.
+      Features:
+      regular — a regular user; rides at least 3 days per week
+      fan — a fan; uses the service on average at least 6 days per week
+    data_tests:
+      - unique_key:
+          arguments:
+            columns: ['user_id']
+
+    columns:
+      - name: "regular"
+        description: "Regular user, rides at least 3 days a week"
+      - name: "fan"
+        description: "A fan, uses the service on average at least 6 days a week"
+
+  - name: "users_class_weekly_destination_trips"
+    description: "User classification based on trips during the week considering the destination"
+    data_tests:
+      - unique_key:
+          arguments:
+            columns: [ "user_id" ]
+    columns:
+      - name: "to_work"
+        description: "Travels to the same place (to work) in the morning at least three times a week"
+
+  - name: "users_class_monthly_trips"
+    description: "User classification based on the number of trips per month"
+    data_tests:
+      - unique_key:
+          arguments:
+            columns: [ "user_id" ]
+    columns:
+      - name: "rare"
+        description: "infrequent/occasional trips, no more than 2 trips per month"
+
+  - name: "users_class"
+    description: >
+      Combining all features into a consolidated table.
+      Joining with the users table to label each user
+    data_tests:
+      - unique_key:
+          arguments:
+            columns: [ "user_id" ]
+
+  - name: "users_class_stat"
+    description: >
+      Calculation of overall group statistics:
+        - number of users in each group
+        - total number of users for information and validation
