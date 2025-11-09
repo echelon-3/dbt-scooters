@@ -54,6 +54,9 @@ models:
       - unique_key:
           arguments:
             columns: [ "month" ]
+            
+  - name: "revenue_daily_stat"
+    description: "Overall daily revenue statistics"
 
 exposures:
   - name: "financial_dashboard"
