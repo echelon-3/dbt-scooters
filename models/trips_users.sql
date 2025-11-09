@@ -1,13 +1,13 @@
 select
-     tp.*
-    ,u.sex
-    ,EXTRACT(YEAR FROM tp.started_at) - EXTRACT(YEAR FROM u.birth_date) AS age
+    tp.*,
+    u.sex,
+    EXTRACT(year from tp.started_at) - EXTRACT(year from u.birth_date) as age
     ,{{ updated_at() }}
 from {{ ref("trips_prep") }} tp
 left join {{ source("scooters_raw", "users") }} u on tp.user_id = u.id
 {% if is_incremental() %}
     where
-        tp.id > (select max(id) from {{ this }})
+        tp.id > (select MAX(id) from {{ this }})
     order by
         id
     limit

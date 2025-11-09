@@ -1,8 +1,9 @@
 SELECT
-    DATE
-  , age
-  , COUNT(*)   AS trips
-  , SUM(price_rub) AS revenue_rub
+    DATE,
+    AGE,
+    COUNT(*) AS TRIPS,
+    SUM(PRICE_RUB) AS REVENUE_RUB
 FROM {{ ref("trips_users") }}
-GROUP BY 1,
-         2
+GROUP BY
+    1,
+    2

@@ -9,3 +9,8 @@ dependencies = [
     "dbt-postgres==1.9.1",
     "urllib3==1.26.18",
 ]
+
+[dependency-groups]
+dev = [
+    "sqlfluff-templater-dbt==3.4.2",
+]

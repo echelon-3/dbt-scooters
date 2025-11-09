@@ -1,8 +1,8 @@
 SELECT
-    date                                  AS date
-  , COUNT(*)                              AS trips
-  , MAX(price_rub)                        AS max_price_rub
-  , AVG(distance_m) / 1000                AS avg_distance_km
-  , SUM(price_rub) / SUM(duration_s / 60) AS avg_price_rub_per_min
+    date AS date,
+    COUNT(*) AS trips,
+    MAX(price_rub) AS max_price_rub,
+    AVG(distance_m) / 1000 AS avg_distance_km,
+    SUM(price_rub) / SUM(duration_s / 60) AS avg_price_rub_per_min
 FROM {{ ref("trips_prep") }}
 GROUP BY date
