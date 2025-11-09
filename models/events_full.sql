@@ -1,8 +1,11 @@
-SELECT
-    ec.user_id,
-    ec.type_id,
-    et.type,
-    ec.timestamp,
-    ec.updated_at
-FROM {{ ref("events_clean") }} AS ec
-LEFT JOIN {{ ref("event_types") }} AS et ON ec.type_id = et.type_id
+select
+    e.user_id,
+    e."timestamp",
+    type_id,
+    et."type",
+    e.updated_at,
+    e."date"
+from
+    {{ ref('events_clean') }} as e
+left join {{ ref('event_types') }} as et
+    using (type_id)
