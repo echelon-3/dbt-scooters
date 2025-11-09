@@ -3,7 +3,7 @@ WITH active_days_in_week AS (
       days_per_week - the number of days with trips per week */
     SELECT
         user_id,
-        date_trunc('week', date) AS "week",
+        date_trunc('week', date) AS week,
         count(DISTINCT date) AS days_per_week
     FROM
         {{ ref("trips_prep") }}

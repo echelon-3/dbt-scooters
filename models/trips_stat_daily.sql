@@ -1,5 +1,5 @@
 SELECT
-    date AS date,
+    date,
     COUNT(*) AS trips,
     MAX(price_rub) AS max_price_rub,
     AVG(distance_m) / 1000 AS avg_distance_km,

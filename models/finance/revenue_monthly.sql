@@ -1,5 +1,5 @@
 select
-    "month",
+    month,
     count(*) as users,
     percentile_cont(0.5) within group (order by revenue_total)
         as revenue_median,
