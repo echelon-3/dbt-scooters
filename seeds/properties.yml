@@ -10,6 +10,15 @@ seeds:
     config:
       delimiter: ","
 
+  - name: "users_name_sex"
+    description: "Names to sex mapping"
+    config:
+      delimiter: ","
+    columns:
+      - name: "name"
+        description: "User name"
+        data_tests: ["unique_not_null"]
+
   - name: "event_types"
     description: "{{ doc('event_types') }}"
     config:
